@@ -43,17 +43,21 @@ DvmDex *Cookie::getCookieAt(int idx, const char *&dexName, const char** ignore) 
     }
 
     // check the ignore case
-    if (ignore != nullptr) {
-        bool isSkip = false;
-        while(*ignore != nullptr) {
-            if (strstr(dexOrJar->fileName, *ignore) != nullptr) {
-                isSkip = true;
-                break;
+    if (dexOrJar->fileName != nullptr) {
+        if (ignore != nullptr) {
+            bool isSkip = false;
+            while(*ignore != nullptr) {
+                if (strstr(dexOrJar->fileName, *ignore) != nullptr) {
+                    isSkip = true;
+                    break;
+                }
+                ignore++;
             }
-            ignore++;
+            if (isSkip)
+                return nullptr;
         }
-        if (isSkip)
-            return nullptr;
+    } else {
+        return nullptr;
     }
 
     // right, just return
