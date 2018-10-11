@@ -43,6 +43,7 @@ DvmDex *Cookie::getCookieAt(int idx, const char *&dexName, const char** ignore) 
     }
 
     // check the ignore case
+    // dexOrJar->fileName 可能为空
     if (dexOrJar->fileName != nullptr) {
         if (ignore != nullptr) {
             bool isSkip = false;
